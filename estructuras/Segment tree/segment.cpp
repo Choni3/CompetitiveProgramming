@@ -42,7 +42,7 @@ void push(int nodo, int l, int r) {
 	tree[nodo].f1 = 0, tree[nodo].f2 = 0;
 }
 
-void update(int nodo, int l, int r, int lu, int ru) {
+void update(int lu, int ru, int nodo, int l, int r) {
 	push(nodo, l, r);
 	if(l > ru || r < lu) return;
 	
@@ -52,17 +52,17 @@ void update(int nodo, int l, int r, int lu, int ru) {
 		push(nodo, l, r);
 	}
 	
-	update(v1, l, me, lu, ru);
-	update(v2, me+1, r, lu, ru);
+	update(lu, ru, v1, l, me);
+	update(lu, ru, v2, me+1, r);
 	//colectar informacion de los hijos
 	tree[nodo].res = (tree[v1].res + tree[v2].res);
 }
 
-ll query(int nodo, int l, int r, int lq, int rq) {
+ll query(int lq, int rq, int nodo, int l, int r) {
 	//push al entrar a la frontera
 	push(nodo, l, r);
 	if(l > rq || r < lq) return 0;
 	if(l >= lq && r <= rq)return tree[nodo].res;
-	return (query(v1, l, me, lq, rq) + query(v2, me + 1, r, lq, rq));
+	return (query(lq, rq, v1, l, me) + query(lq, rq, v2, me + 1, r));
 }
 
