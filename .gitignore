@@ -1,0 +1,14 @@
+**/.cph/**
+*.out
+*.exe
+*.o
+*.obj
+*.so
+*.dll
+*.a
+**/.cph/
+*.in.*
+*.out.*
+*.log
+bin/
+build/
